@@ -18,6 +18,7 @@ var TodoList = React.createClass ({
     });
     return (
       <div>
+        <TodoForm />
         {list}
       </div>
     );
@@ -44,9 +45,46 @@ var TodoListItem = React.createClass({
       </div>
 
     );
+  }
+});
+
+var TodoForm = React.createClass({
+  getInitialState: function() {
+    return {title: "", body: ""};
+  },
+  updateTitle: function(e) {
+    this.setState({title: e.target.value});
+  },
+  updateBody: function(e) {
+    this.setState({body: e.target.value});
+  },
+  handleSubmit: function(e) {
+    e.preventDefault();
+
+    TodoStore.create({
+      title: this.state.title,
+      body: this.state.body,
+      done: false
+    });
+
+    this.setState({
+      title: "",
+      body: ""
+    });
+  },
+  render: function() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input type="text" name="todo[title]" value={this.state.title}
+          onChange={this.updateTitle} />
+        <textarea name="todo[body]" value={this.state.body}
+          onChange={this.updateBody}></textarea>
+        <button>Submit!</button>
+
+      </form>
+    );
+
 
   }
-
-
 
 });
