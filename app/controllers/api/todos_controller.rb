@@ -2,27 +2,34 @@ class Api::TodosController < ApplicationController
 
   def index
     @todos = Todo.all
-    render json: @todos.to_json
+    render json: @todos
   end
 
   def show
     @todo = Todo.find(params[:id])
-    render json: @todo.to_json
+    render json: @todo
   end
 
-  def create!
+  def create
     @todo = Todo.new(todo_params)
     @todo.save!
+    render json: @todo
   end
 
-  def update!
+  def update
     @todo = Todo.find(params[:id])
-    @todo.update!(todo_params)
+    unless @todo.nil?
+      @todo.update!(todo_params)
+      render json: @todo
+    end
   end
 
-  def destroy!
+  def destroy
     @todo = Todo.find(params[:id])
-    @todo.destroy!
+    unless @todo.nil?
+      @todo.destroy!
+      render json: @todo
+    end
   end
 
 private
