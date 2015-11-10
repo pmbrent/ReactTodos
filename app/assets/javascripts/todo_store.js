@@ -3,7 +3,7 @@
   "use strict";
 
   var TodoStore = root.TodoStore = {};
-  var _todos = {};
+  var _todos = [];
   var _callbacks = [];
 
   var changed = TodoStore.changed = function() {
