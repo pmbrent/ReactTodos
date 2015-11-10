@@ -35,6 +35,9 @@ var TodoListItem = React.createClass({
     return {todo: this.props.todo};
   },
 
+  handleDestroy: function() {
+    TodoStore.destroy(this.state.todo.id);
+  },
 
   render: function() {
 
@@ -42,6 +45,7 @@ var TodoListItem = React.createClass({
       <div>
         <div>{this.state.todo.title}</div>
         <div>{this.state.todo.body}</div>
+        <button onClick={this.handleDestroy}>Delete</button>
       </div>
 
     );
